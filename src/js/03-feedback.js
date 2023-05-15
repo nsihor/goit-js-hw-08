@@ -26,7 +26,7 @@ const onThrottleSavingFormData = throttle(e => {
 function saveFormDataToLocalStorage() {
     savedFormData.email = emailInput.value;
     savedFormData.message = messageInput.value;
-    localStorage.setItem(LOCAL_STORAGE_KEY_FORM_DATA, JSON.stringify(savedFormData))
+    localStorage.setItem(LOCAL_STORAGE_KEY_FORM_DATA, JSON.stringify(savedFormData));
 };
 
 function onSubmitFormData(e) {
@@ -41,4 +41,4 @@ function onSubmitFormData(e) {
 
 form.addEventListener('input', onThrottleSavingFormData);
 
-form.addEventListener('submit', onSubmitFormData)
+form.addEventListener('submit', onSubmitFormData);
