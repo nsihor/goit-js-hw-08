@@ -7,7 +7,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const gallery = galleryItems
   .map(
     (item) =>
-      `<li class="gallery__item">
+      `<li class="gallery__item" style='list-style: none'>
         <a class="gallery__link" href=${item.original}>
             <img class="gallery__image" src=${item.preview} alt=${item.description} title=${item.description} />
         </a>
@@ -16,4 +16,4 @@ const gallery = galleryItems
 const galleryContainer = document.querySelector(".gallery");
 galleryContainer.innerHTML = gallery;
 
-const imgModal = new SimpleLightbox('.gallery a', {captionDelay: 250});
+const imgModal = new SimpleLightbox('.gallery a', {captionDelay: 250, captionsData: 'title'});

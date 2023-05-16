@@ -9,34 +9,30 @@ const submitButton = form.querySelector('button');
 
 const savedFormData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_FORM_DATA)) || {};
 
-if (savedFormData.email) {
+if (savedFormData.email || savedFormData.message) {
     emailInput.value = savedFormData.email;
-};
-if (savedFormData.message) {
     messageInput.value = savedFormData.message;
 };
+// if (savedFormData.message) {
+//     messageInput.value = savedFormData.message;
+// };
 
 const onThrottleSavingFormData = throttle(e => {
-    saveFormDataToLocalStorage()
-    // if (e.target === emailInput || messageInput) {
-    //     saveFormDataToLocalStorage()
-    // }
-}, 500);
-
-function saveFormDataToLocalStorage() {
     savedFormData.email = emailInput.value;
     savedFormData.message = messageInput.value;
     localStorage.setItem(LOCAL_STORAGE_KEY_FORM_DATA, JSON.stringify(savedFormData));
-};
+}, 500);
 
 function onSubmitFormData(e) {
     e.preventDefault();
 
-    console.log(savedFormData);
-
-    localStorage.removeItem(LOCAL_STORAGE_KEY_FORM_DATA);
-    messageInput.value = '';
-    emailInput.value = '';
+    if (savedFormData.email && savedFormData.message) {
+        console.log(savedFormData);
+        localStorage.removeItem(LOCAL_STORAGE_KEY_FORM_DATA);
+        form.reset();
+    } else {
+        window.alert('Fill in the blank fields!')
+    }
 }
 
 form.addEventListener('input', onThrottleSavingFormData);
